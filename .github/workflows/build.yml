@@ -1,7 +1,13 @@
 name: Build
 
 on:
+  push:
+    branches:
+      - main
+      - update
   pull_request:
+    branches:
+      - main
 
 jobs:
   build-packages:
@@ -24,11 +30,19 @@ jobs:
       - name: Build
         run: make fast
 
-      - name: Collect metadata
+      - name: Collect metadata for PR
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
           MERGE_ID=$(git rev-parse --short HEAD)
           PRNUMBER=${GITHUB_REF_NAME%/merge}
           echo "ARTIFACT_NAME=PR-$PRNUMBER-$MERGE_ID" >> $GITHUB_ENV
+
+      - name: Collect metadata for Push
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          COMMIT=$(git rev-parse --short HEAD)
+          BRANCH=${GITHUB_REF#refs/heads/}
+          echo "ARTIFACT_NAME=$BRANCH-$COMMIT" >> $GITHUB_ENV
 
       - name: Store packages
         uses: actions/upload-artifact@v4
