@@ -2,8 +2,6 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -21,11 +19,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            inkscape potrace imagemagick \
+            potrace imagemagick \
             python3-fontforge python3-fonttools python3-yaml \
             npm git make debhelper devscripts build-essential
           sudo npm install -g svgo
           git clone https://github.com/13rac1/scfbuild.git SCFBuild
+
+      - name: Install resvg
+        uses: taiki-e/install-action@v2
+        with:
+          tool: resvg
 
       - name: Build
         run: make fast
