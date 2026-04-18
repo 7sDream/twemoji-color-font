@@ -54,7 +54,7 @@ all: package
 
 # Run the build concurrently against all available cores
 fast:
-	make -j $(CPU_CORES)
+	$(MAKE) -j $(CPU_CORES)
 
 update:
 	cp ../twemoji/assets/svg/* assets/twemoji-svg/

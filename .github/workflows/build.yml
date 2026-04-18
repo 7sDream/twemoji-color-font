@@ -28,7 +28,7 @@ jobs:
           git clone https://github.com/13rac1/scfbuild.git SCFBuild
 
       - name: Build
-        run: make fast
+        run: make -s fast
 
       - name: Collect metadata for PR
         if: ${{ github.event_name == 'pull_request' }}
