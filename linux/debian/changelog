@@ -1,3 +1,9 @@
+fonts-twemoji-svginot (17.0.2-1) bionic; urgency=medium
+
+  * Update to twemoji 17.0.2.
+
+ -- 7sDream <i@7sdre.am>  Sat, 18 Apr 2026 22:33:00 +0800
+
 fonts-twemoji-svginot (15.1.0-1) bionic; urgency=medium
 
   * Update to twemoji 15.1.0.
